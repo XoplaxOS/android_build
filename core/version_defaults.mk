@@ -87,6 +87,7 @@ ifeq "" "$(PLATFORM_BASE_OS)"
   #
   # If there is no $PLATFORM_BASE_OS set, keep it empty.
   PLATFORM_BASE_OS :=
+endif
 
 ifeq "REL" "$(PLATFORM_VERSION_CODENAME)"
   PLATFORM_PREVIEW_SDK_VERSION := 0
