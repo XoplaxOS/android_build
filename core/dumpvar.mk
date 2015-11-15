@@ -85,11 +85,5 @@ $(info   HOST_BUILD_TYPE=$(HOST_BUILD_TYPE))
 $(info   HOST_USE_PIPE=$(HOST_USE_PIPE))
 $(info   BUILD_ID=$(BUILD_ID))
 $(info   OUT_DIR=$(OUT_DIR))
-ifneq (,$(filter true, $(CYNGN_TARGET) $(EXTERNAL_CLEAN_TARGET)))
-ifeq ($(CYNGN_TARGET), true)
-$(info   CYNGN_TARGET=$(CYNGN_TARGET))
-endif
-$(info   CYNGN_FEATURES=$(CYNGN_FEATURES))
-endif
 $(info ============================================)
 endif

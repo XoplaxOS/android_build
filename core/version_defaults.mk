@@ -47,7 +47,7 @@ ifeq "" "$(PLATFORM_VERSION)"
   # which is the version that we reveal to the end user.
   # Update this value when the platform version changes (rather
   # than overriding it somewhere else).  Can be an arbitrary string.
-  PLATFORM_VERSION := 5.1.1
+  PLATFORM_VERSION := 6.0
 endif
 
 ifeq "" "$(PLATFORM_SDK_VERSION)"
@@ -59,7 +59,7 @@ ifeq "" "$(PLATFORM_SDK_VERSION)"
   # intermediate builds).  During development, this number remains at the
   # SDK version the branch is based on and PLATFORM_VERSION_CODENAME holds
   # the code-name of the new development work.
-  PLATFORM_SDK_VERSION := 22
+  PLATFORM_SDK_VERSION := 23
 endif
 
 ifeq "" "$(PLATFORM_VERSION_CODENAME)"
@@ -87,6 +87,22 @@ ifeq "" "$(PLATFORM_BASE_OS)"
   #
   # If there is no $PLATFORM_BASE_OS set, keep it empty.
   PLATFORM_BASE_OS :=
+
+ifeq "REL" "$(PLATFORM_VERSION_CODENAME)"
+  PLATFORM_PREVIEW_SDK_VERSION := 0
+else
+  ifeq "" "$(PLATFORM_PREVIEW_SDK_VERSION)"
+    # This is the definition of a preview SDK version over and above the current
+    # platform SDK version. Unlike the platform SDK version, a higher value
+    # for preview SDK version does NOT mean that all prior preview APIs are
+    # included. Packages reading this value to determine compatibility with
+    # known APIs should check that this value is precisely equal to the preview
+    # SDK version the package was built for, otherwise it should fall back to
+    # assuming the device can only support APIs as of the previous official
+    # public release.
+    # This value will always be 0 for release builds.
+    PLATFORM_PREVIEW_SDK_VERSION := 0
+  endif
 endif
 
 ifeq "" "$(DEFAULT_APP_TARGET_SDK)"
@@ -100,14 +116,6 @@ ifeq "" "$(DEFAULT_APP_TARGET_SDK)"
   else
     DEFAULT_APP_TARGET_SDK := $(PLATFORM_VERSION_CODENAME)
   endif
-endif
-
-ifeq "" "$(PLATFORM_SECURITY_PATCH)"
-  # Used to indicate the security patch that has been applied to the device.
-  # Can be an arbitrary string, but must be a single word.
-  #
-  # If there is no $PLATFORM_SECURITY_PATCH set, keep it empty.
-  PLATFORM_SECURITY_PATCH := 2015-10-01
 endif
 
 ifeq "" "$(PLATFORM_BASE_OS)"
