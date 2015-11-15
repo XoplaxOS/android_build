@@ -76,6 +76,7 @@ ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
         endif
         endif
     endif
+endif
 
 $(call project-set-path,qcom-audio,hardware/qcom/audio-caf/$(QCOM_HARDWARE_VARIANT))
 $(call project-set-path,qcom-display,hardware/qcom/display-caf/$(QCOM_HARDWARE_VARIANT))
